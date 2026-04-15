@@ -12,8 +12,8 @@
     }
 
     body {
-      background: #111;
-      color: #fff;
+      background: #eee;
+      color: #111;
       font-family: sans-serif;
       min-height: 100vh;
       display: flex;
@@ -40,7 +40,7 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none; /* IE/Edge */
-      padding: 16px 0 24px;
+      scroll-snap-type: x mandatory;
     }
 
     .gallery-track-wrapper::-webkit-scrollbar {
@@ -49,24 +49,17 @@
 
     .gallery-track {
       display: flex;
-      flex-direction: row;
-      gap: 0;
-      padding: 0;
       width: max-content;
     }
 
     .gallery-track img {
-      height: 70vh;
-      width: auto;
+      width: 100vw;
+      height: calc(100svh - 96px);
       display: block;
-      object-fit: cover;
+      object-fit: contain;
       flex-shrink: 0;
+      scroll-snap-align: start;
       cursor: pointer;
-      transition: opacity 0.2s ease;
-    }
-
-    .gallery-track img:hover {
-      opacity: 0.88;
     }
 
     /* Lightbox */
