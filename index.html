@@ -62,6 +62,20 @@
       cursor: pointer;
     }
 
+    @media (min-width: 768px) {
+      .gallery-track-wrapper {
+        scroll-snap-type: none;
+        padding: 16px 0 24px;
+      }
+
+      .gallery-track img {
+        width: auto;
+        height: 70vh;
+        object-fit: cover;
+        scroll-snap-align: none;
+      }
+    }
+
     /* Lightbox */
     .lightbox {
       display: none;
@@ -278,8 +292,19 @@
       lightboxImg.src = images[current].src;
     }
 
+    const wrapper = document.querySelector('.gallery-track-wrapper');
+
     images.forEach((img, i) => {
-      img.addEventListener('click', () => openLightbox(i));
+      img.addEventListener('click', (e) => {
+        if (window.innerWidth < 768) {
+          const target = e.clientX > window.innerWidth / 2
+            ? Math.min(i + 1, images.length - 1)
+            : Math.max(i - 1, 0);
+          wrapper.scrollTo({ left: target * window.innerWidth, behavior: 'smooth' });
+        } else {
+          openLightbox(i);
+        }
+      });
     });
 
     document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
